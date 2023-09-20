@@ -2,7 +2,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { image_samples } from "../(data)/image-sample";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import LoadingSpinner from '../(components)/LoadingSpinner'
 
 type Props = {};
 
@@ -19,7 +18,7 @@ function ImageContainer({}: Props) {
     setFilteredCharacters(filtered);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     setSearchQuery(e.target.value);
     filterCharacters(); 
   };
