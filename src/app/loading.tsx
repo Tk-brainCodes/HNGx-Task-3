@@ -2,7 +2,7 @@ type Props = {};
 
 function loading({}: Props) {
   return (
-    <div className='w-[100vw] transition ease-in-out h-[100vh] flex  items-center justify-center bg-black text-white'>
+    <div className='w-[100vw] transition ease-in-out h-[100vh] flex  items-center justify-center bg-white text-black'>
       <div
         aria-label='Loading...'
         role='status'
@@ -85,7 +85,7 @@ function loading({}: Props) {
             stroke-width='24'
           ></line>
         </svg>
-        <span className='text-3xl font-semibold text-white'>Photo Plus...</span>
+        <span className='text-3xl font-semibold text-black'>Loading...</span>
       </div>
     </div>
   );

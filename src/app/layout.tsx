@@ -1,9 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import Header from "./(components)/Header";
 import Footer from "./(components)/Footer";
 import { DM_Sans } from "next/font/google";
-
+import { UserProvider } from "./(userContext)/user";
 
 const dmSans = DM_Sans({
   weight: ["400", "700"],
@@ -24,9 +23,10 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${dmSans.className}`}>
-        <Header />
-        {children}
-        <Footer />
+        <UserProvider>
+          {children}
+          <Footer />
+        </UserProvider>
       </body>
     </html>
   );
