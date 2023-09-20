@@ -24,6 +24,7 @@ function ImageContainer({}: Props) {
     filterCharacters();
   }, [searchQuery, characters]);
 
+  //handle search input
   function handleInputChange(e: any) {
     setSearchQuery(e.target.value);
     setLoading(true);
@@ -32,7 +33,7 @@ function ImageContainer({}: Props) {
     }, 3000);
   }
 
-  //re order
+  //re-order according to index, and update character array
   function handleOnDragEnd(result: any) {
     if (!result.destination) return;
 
@@ -82,7 +83,7 @@ function ImageContainer({}: Props) {
                         className={`${snapshot.isDragging ? "dragging" : ""}`}
                       >
                         {loading ? (
-                          <div className='w-[280px] h-[320px] bg-gray-300 animate-pulse' />
+                          <div className='w-[280px] max-sm:w-full h-[320px] bg-gray-300 animate-pulse' />
                         ) : (
                           <div className='w-[280px] max-sm:w-full h-[320px] rounded-[4px] bg-slate-300'>
                             <Image
@@ -91,7 +92,7 @@ function ImageContainer({}: Props) {
                               width={200}
                               height={200}
                               loading='lazy'
-                              className='w-full h-full object-cover'
+                              className='w-full h-full object-cover hover:brightness-50'
                             />
                           </div>
                         )}
