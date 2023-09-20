@@ -4,6 +4,8 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
 import { useRouter } from "next/navigation";
+import { IconPhotoPlus } from "@tabler/icons-react";
+
 
 type Props = {};
 
@@ -64,6 +66,10 @@ const Login = (props: Props) => {
 
   return (
     <div className='w-[100vw] h-[100vh] flex flex-col items-center justify-center'>
+      <div className='flex gap-2'>
+        <IconPhotoPlus size={20} />
+        <span>Photo Plus</span>
+      </div>
       <section className='bg-white'>
         <div className='flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
           <div className='w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 '>
@@ -135,14 +141,14 @@ const Login = (props: Props) => {
                 )}
                 <button
                   type='submit'
-                   className={`w-full text-white hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
-          isLoading
-            ? "bg-gray-400 cursor-not-allowed" 
-            : "bg-black dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-        }`}
-        disabled={isLoading} 
+                  className={`w-full text-white hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
+                    isLoading
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-black dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  }`}
+                  disabled={isLoading}
                 >
-        {isLoading ? "Signing in..." : "Sign in"}
+                  {isLoading ? "Signing in..." : "Sign in"}
                 </button>
               </form>
             </div>

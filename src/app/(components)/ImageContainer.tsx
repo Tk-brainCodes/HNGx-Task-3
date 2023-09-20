@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { image_samples } from "../(data)/image-sample";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { IconTag } from "@tabler/icons-react";
 
 type Props = {};
 
 function ImageContainer({}: Props) {
   const [characters, updateCharacters] = useState(image_samples);
-  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredCharacters, setFilteredCharacters] = useState(characters); 
+  const [filteredCharacters, setFilteredCharacters] = useState(characters);
 
   const filterCharacters = () => {
     const filtered = characters.filter((character) =>
@@ -18,24 +18,23 @@ function ImageContainer({}: Props) {
     setFilteredCharacters(filtered);
   };
 
-  const handleInputChange = (e: any) => {
+  useEffect(() => {
+    filterCharacters();
+  }, [searchQuery, characters]);
+
+  function handleInputChange(e: any) {
     setSearchQuery(e.target.value);
-    filterCharacters(); 
-  };
+  }
 
   function handleOnDragEnd(result: any) {
     if (!result.destination) return;
 
-    const items = Array.from(filteredCharacters); 
+    const items = Array.from(filteredCharacters);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
 
     updateCharacters(items);
   }
-
-  const handleImageLoad = () => {
-    setLoading(false);
-  };
 
   return (
     <>
@@ -70,22 +69,19 @@ function ImageContainer({}: Props) {
                         {...provided.dragHandleProps}
                         className='mb-10'
                       >
-                        {loading ? (
-    <div className="w-[280px] h-[320px] bg-gray-300 animate-pulse"/>
-                        ) : (
-                          <>
-                            <Image
-                              src={image}
-                              alt={`Image ${index}`}
-                              width={200}
-                              height={200}
-                              loading='lazy'
-                              className='w-[280px] h-[320px] rounded-[4px] bg-slate-300'
-                              onLoad={handleImageLoad}
-                            />
-                            <div className="absolute top-0 left-0 bg-black text-white p-2">{tag}</div>
-                          </>
-                        )}
+                        <div className='w-[280px] h-[320px] rounded-[4px] bg-slate-300'>
+                          <Image
+                            src={image}
+                            alt={`Image ${index}`}
+                            width={200}
+                            height={200}
+                            loading='lazy'
+                            className='w-full h-full object-cover'
+                          />
+                          <div className='relative flex gap-3 opacity-75 bg-black text-white p-2'>
+                            <IconTag size={20} className="text-white"/>{tag}
+                          </div>
+                        </div>
                       </div>
                     )}
                   </Draggable>
