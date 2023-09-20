@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
@@ -12,6 +12,9 @@ const config: Config = {
       fontFamily: {
         monstserrat: ["var(--font-dmsans)"],
       },
+      gridTemplateColumns: {
+        fluid: "repeat(auto-fit,minmax(15rem,1fr))",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -21,4 +24,4 @@ const config: Config = {
   },
   plugins: [],
 };
-export default config
+export default config;

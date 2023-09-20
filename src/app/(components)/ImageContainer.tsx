@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { image_samples } from "../(data)/image-sample";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { IconTag } from "@tabler/icons-react";
+import { toast, Toaster } from "react-hot-toast";
+import {IconTag} from '@tabler/icons-react'
 
 type Props = {};
 
@@ -10,6 +11,7 @@ function ImageContainer({}: Props) {
   const [characters, updateCharacters] = useState(image_samples);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredCharacters, setFilteredCharacters] = useState(characters);
+  const [loading, setLoading] = useState(false);
 
   const filterCharacters = () => {
     const filtered = characters.filter((character) =>
@@ -24,8 +26,13 @@ function ImageContainer({}: Props) {
 
   function handleInputChange(e: any) {
     setSearchQuery(e.target.value);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   }
 
+  //re order
   function handleOnDragEnd(result: any) {
     if (!result.destination) return;
 
@@ -34,10 +41,15 @@ function ImageContainer({}: Props) {
     items.splice(result.destination.index, 0, reorderedItem);
 
     updateCharacters(items);
+
+    toast.success("Element Ordered Successfully", {
+      icon: "👍",
+    });
   }
 
   return (
     <>
+      <Toaster />
       <div className='mx-auto px-[2.7em] mb-[2em]'>
         <div className='text-3xl mb-[20px] font-semibold text-black flex gap-5'>
           Gallery
@@ -46,7 +58,7 @@ function ImageContainer({}: Props) {
         <input
           type='text'
           placeholder='Search image tags...'
-          className='text-black w-[400px] text-base mt-[20px] border-b border-gray-300 font-normal leading-normal bg-transparent outline-none'
+          className='text-black w-full sm:w-[400px] text-base mt-[20px] border-b border-gray-300 font-normal leading-normal bg-transparent outline-none'
           value={searchQuery}
           onChange={handleInputChange}
         />
@@ -58,29 +70,34 @@ function ImageContainer({}: Props) {
               <div
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className='grid grid-cols-1 gap-3 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+                className='grid grid-cols-fluid  gap-4'
               >
                 {filteredCharacters.map(({ id, image, tag }, index) => (
                   <Draggable key={id} draggableId={id} index={index}>
-                    {(provided) => (
+                    {(provided, snapshot) => (
                       <div
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        className='mb-10'
+                        className={`${snapshot.isDragging ? "dragging" : ""}`}
                       >
-                        <div className='w-[280px] h-[320px] rounded-[4px] bg-slate-300'>
-                          <Image
-                            src={image}
-                            alt={`Image ${index}`}
-                            width={200}
-                            height={200}
-                            loading='lazy'
-                            className='w-full h-full object-cover'
-                          />
-                          <div className='relative flex gap-3 opacity-75 bg-black text-white p-2'>
-                            <IconTag size={20} className="text-white"/>{tag}
+                        {loading ? (
+                          <div className='w-[280px] h-[320px] bg-gray-300 animate-pulse' />
+                        ) : (
+                          <div className='w-[280px] max-sm:w-full h-[320px] rounded-[4px] bg-slate-300'>
+                            <Image
+                              src={image}
+                              alt={`Image ${index}`}
+                              width={200}
+                              height={200}
+                              loading='lazy'
+                              className='w-full h-full object-cover'
+                            />
                           </div>
+                        )}
+                        <div className='relative opacity-70 flex gap-3 max-sm:w-full w-[280px] bg-black text-white  p-2'>
+                          <IconTag size={20} />
+                          {tag}
                         </div>
                       </div>
                     )}

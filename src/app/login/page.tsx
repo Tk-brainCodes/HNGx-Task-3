@@ -6,7 +6,6 @@ import { auth } from "../../../firebase";
 import { useRouter } from "next/navigation";
 import { IconPhotoPlus } from "@tabler/icons-react";
 
-
 type Props = {};
 
 const Login = (props: Props) => {
@@ -16,7 +15,7 @@ const Login = (props: Props) => {
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateForm = () => {
     let isValid = true;
@@ -47,8 +46,8 @@ const Login = (props: Props) => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-   if (validateForm()) {
-      setIsLoading(true); 
+    if (validateForm()) {
+      setIsLoading(true);
 
       try {
         await signInWithEmailAndPassword(auth, email, password);
@@ -59,17 +58,13 @@ const Login = (props: Props) => {
         setError("Invalid email or password");
         console.log(error);
       } finally {
-        setIsLoading(false); 
+        setIsLoading(false);
       }
     }
   };
 
   return (
     <div className='w-[100vw] h-[100vh] flex flex-col items-center justify-center'>
-      <div className='flex gap-2'>
-        <IconPhotoPlus size={20} />
-        <span>Photo Plus</span>
-      </div>
       <section className='bg-white'>
         <div className='flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
           <div className='w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 '>
@@ -157,6 +152,6 @@ const Login = (props: Props) => {
       </section>
     </div>
   );
-};;
+};
 
 export default Login;
