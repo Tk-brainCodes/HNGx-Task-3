@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
+import Link from "next/link";
 
 type Props = {};
 
@@ -108,6 +109,15 @@ const Signup = (props: Props) => {
                   {isLoading ? "Signing up..." : "Sign up"}
                 </button>
               </form>
+              <p className='text-sm font-light text-gray-500 dark:text-gray-400'>
+                Already have an account?{" "}
+                <Link
+                  href='login'
+                  className='font-medium text-primary-600 hover:underline dark:text-primary-500'
+                >
+                  Login
+                </Link>
+              </p>
             </div>
           </div>
         </div>
