@@ -18,6 +18,11 @@ The Image Draggable Gallery is a web application that allows users to create and
 
 ## Getting Started
 
+### Login information
+
+- email: user@example.com
+- password: 1Password
+
 These instructions will help you set up the Image Draggable Gallery on your local machine.
 
 ### Prerequisites
