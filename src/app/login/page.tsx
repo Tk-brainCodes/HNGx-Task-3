@@ -44,7 +44,7 @@ const Login = (props: Props) => {
   };
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); 
 
     if (validateForm()) {
       setIsLoading(true);

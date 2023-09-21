@@ -4,10 +4,13 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 const Signup = (props: Props) => {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -20,6 +23,7 @@ const Signup = (props: Props) => {
       setIsLoading(true);
       await createUserWithEmailAndPassword(auth, email, password);
       setIsLoading(false);
+      router.push("login");
     } catch (error) {
       setError("Invalid email or password");
       console.log(error);

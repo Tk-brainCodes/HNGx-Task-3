@@ -5,6 +5,7 @@ import { UserContext } from "./(userContext)/user";
 import ImageContainer from "./(components)/ImageContainer";
 import Header from "./(components)/Header";
 import Login from "./login/page";
+import Signup from "./signup/page";
 
 export default function Home() {
   //@ts-ignore
@@ -18,7 +19,10 @@ export default function Home() {
           <ImageContainer />
         </>
       ) : (
-        <Login />
+        <>
+          <Login />
+          <Signup />
+        </>
       )}
     </main>
   );
