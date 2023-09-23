@@ -69,4 +69,11 @@ Before you begin, make sure you have the following installed:
 6. Tech Stack
 -  Next js and Typescript
 -  Tailwind Css
--  Firebase    
+-  Firebase
+
+7. Features
+- Create account
+- Sign in
+- Search for image tag
+- Drag and Drop image
+- Get notification when an image is dragged  
